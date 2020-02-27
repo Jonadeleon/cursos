@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Inventario</title>
+
+</head>
+<body>
+    <form action="/introducir_activo" method="GET" >
+        <h1> Inventario de activos </h1>
+       <!-- Boton para pagina de inicio -->
+        <div class="form-group col-md-1">
+            <button type="submit" class="btn btn-primary">Introducir un activo</button>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Cantidad</th>
+              <th>Ubicacion</th>
+              <th>Estado</th>
+              <th>Url</th>
+              <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody class="searchable">
+        {% for activo in activos %}
+                <tr>
+                  <td>{{activo['tipe']}}</td>
+                  <td>{{activo['mark']}}</td>
+                  <td>{{activo['model']}}</td>
+                  <td> <!-- {{activo['quantity']}} -->
+                    <input name="quantity" onchange="quantity(this, 'activo[quantity]'" type="number">
+                  </td>
+                  <td> <!-- {{activo['ubication']}} -->
+                    <input name="ubication" onchange="ubication(this, 'activo[ubication]'" type="text">
+                  </td>
+                  <td> <!-- {{activo['status']}} -->
+                    <input name="status" onchange="status(this, 'activo[status]'" type="text">
+                  </td>
+                  <td>{{activo['url']}}</td>
+                  <td>{{activo['observations']}}</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+           function doalert(checkboxElem, mark, model, ubication, status) {
+               var quantity = $(checkboxElem).val()
+                   $.get("change_active", {quantity: quantity, mark: mark, model: model, ubication: ubication, status: status} );
+           };
+    </script>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>

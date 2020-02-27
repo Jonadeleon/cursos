@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title> Pruebas de Flask</title>
+</head>
+
+<body>
+    <form>
+        <div>
+            <div>
+            {{ render_field(form.username, class='form-control') }}
+            </div>
+            <div>
+            {{ render_field(form.email, class='form-control') }}
+            </div>
+            <div>
+            {{ render_field(form.comment, class='form-control') }}
+            </div>
+            {{ form.honeypot }}
+            {{ render_field(form.honeypot, class='form-control') }}
+        </div>
+    </form>
+</body>
+
+</html>
